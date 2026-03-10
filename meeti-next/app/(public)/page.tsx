@@ -1,3 +1,4 @@
+import Hero from "@/src/shared/ui/Hero";
 import { Metadata } from "next";
 
 
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <h1>Inicio</h1>
+      <Hero />
     </>
   );
 }
