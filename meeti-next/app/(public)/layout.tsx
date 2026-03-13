@@ -1,4 +1,4 @@
-import Header from "@/src/shared/ui/Header";
+import Header from "@/src/shared/components/ui/Header";
 import Link from "next/link";
 
 export default function PublictLayout({

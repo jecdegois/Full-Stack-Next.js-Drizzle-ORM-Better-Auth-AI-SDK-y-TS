@@ -1,4 +1,4 @@
-import Logo from "@/src/shared/ui/Logo";
+import Logo from "@/src/shared/components/ui/Logo";
 import Link from "next/link";
 
 
