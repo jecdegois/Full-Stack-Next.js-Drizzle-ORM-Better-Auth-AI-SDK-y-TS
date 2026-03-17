@@ -9,6 +9,7 @@ import {
   FormSubmit,
 } from "@/components/forms";
 import { SignUpInput, SignUpSchema } from "../schemas/authSchema";
+import { signUpAction } from "../actions/auth-action";
 
 export default function RegisterForm() {
   const {
@@ -21,7 +22,7 @@ export default function RegisterForm() {
   });
 
   const onSubmit = (data:SignUpInput) => {
-    console.log(data)
+    signUpAction(data)
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
