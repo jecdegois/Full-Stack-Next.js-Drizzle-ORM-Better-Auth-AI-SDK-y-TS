@@ -10,19 +10,30 @@ import {
 } from "@/components/forms";
 import { SignUpInput, SignUpSchema } from "../schemas/authSchema";
 import { signUpAction } from "../actions/auth-action";
+import toast from "react-hot-toast";
 
 export default function RegisterForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({
     resolver: zodResolver(SignUpSchema),
-    mode: "onSubmit"
+    mode: "onSubmit",
   });
 
-  const onSubmit = (data:SignUpInput) => {
-    signUpAction(data)
+  const onSubmit = async (data: SignUpInput) => {
+    const { success, error } = await signUpAction(data);
+
+    if (error) {
+      toast.error(error);
+    }
+
+    if (success) {
+      toast.success(success );
+      reset()
+    }
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

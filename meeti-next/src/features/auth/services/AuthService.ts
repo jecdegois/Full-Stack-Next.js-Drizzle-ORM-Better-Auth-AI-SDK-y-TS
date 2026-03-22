@@ -1,23 +1,31 @@
-import { SignUpInput } from "../schemas/authSchema"
-
+import { auth } from "@/src/lib/auth";
+import { SignUpInput } from "../schemas/authSchema";
 
 //Aqui va toda la logica de negocio
 
 class AuthService {
+  async register(credentials: SignUpInput) {
+    const { name, email, password } = credentials;
 
-    async register(credentials: SignUpInput) {
+    //Revisar si el usuario existe
 
-        const { name, email, password } = credentials;
+    //Validaciones de negocio
 
-        //Revisar si el usuario existe
+    //Manejar el registro
 
+    await auth.api.signUpEmail({
+      body: {
+        name,
+        email,
+        password,
+      },
+    });
 
-        //Validaciones de negocio
-
-        //Manejar el registro
-
+    return {
+        error: "",
+        success: "Cuenta creada correctamente"
     }
+  }
 }
 
-
-export const authService = new AuthService()
+export const authService = new AuthService();
