@@ -13,7 +13,7 @@ export const BaseAuthSchema = z.object({
     .min(1, { error: "El password no puede ir vacio" }),
 });
 
-export const signInSchema = BaseAuthSchema.pick({
+export const SignInSchema = BaseAuthSchema.pick({
   email: true,
 }).extend({
   password: z
@@ -33,4 +33,4 @@ export const SignUpSchema = BaseAuthSchema.pick({
 });
 
 export type SignUpInput = z.infer<typeof SignUpSchema>;
-export type SignInInput = z.infer<typeof signInSchema>;
+export type SignInInput = z.infer<typeof SignInSchema>;

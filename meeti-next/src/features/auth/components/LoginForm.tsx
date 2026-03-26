@@ -9,8 +9,9 @@ import {
   FormLabel,
   FormSubmit,
 } from "@/src/shared/components/forms";
-import { SignInInput, signInSchema } from "../schemas/authSchema";
+import { SignInInput, SignInSchema } from "../schemas/authSchema";
 import { signInAction } from "../actions/auth-action";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
   const {
@@ -18,12 +19,20 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(SignInSchema),
   });
 
 
   const onSubmit = async(data: SignInInput) => {
-    await signInAction(data)
+    const { error, success } = await signInAction(data);
+
+    if(error) {
+      toast.error(error);
+    }
+
+    if(success) {
+      toast.success(success);
+    }
   }
   return (
     <Form
