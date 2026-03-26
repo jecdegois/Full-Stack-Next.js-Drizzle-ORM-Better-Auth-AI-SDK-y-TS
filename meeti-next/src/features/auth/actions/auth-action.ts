@@ -1,6 +1,6 @@
 "use server"
 
-import { SignUpInput, SignUpSchema } from "../schemas/authSchema"
+import { SignInInput, SignUpInput, SignUpSchema } from "../schemas/authSchema"
 import { authService } from "../services/AuthService";
 
 export async function signUpAction(input: SignUpInput) {
@@ -17,4 +17,10 @@ export async function signUpAction(input: SignUpInput) {
 
     return response;
 
+}
+
+
+export async function signInAction(input: SignInInput) {
+
+    console.log("llego", input)
 }

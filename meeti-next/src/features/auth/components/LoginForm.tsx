@@ -10,6 +10,7 @@ import {
   FormSubmit,
 } from "@/src/shared/components/forms";
 import { SignInInput, signInSchema } from "../schemas/authSchema";
+import { signInAction } from "../actions/auth-action";
 
 export default function LoginForm() {
   const {
@@ -21,8 +22,8 @@ export default function LoginForm() {
   });
 
 
-  const onSubmit = (data: SignInInput) => {
-
+  const onSubmit = async(data: SignInInput) => {
+    await signInAction(data)
   }
   return (
     <Form
