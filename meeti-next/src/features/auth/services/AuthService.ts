@@ -70,8 +70,11 @@ class AuthService {
       };
     } catch (error) {
       if (error instanceof APIError) {
+        console.log(error.message);
+        console.log(error.statusCode);
         const messages: Record<number, string> = {
           401: "Credenciales inválidas",
+          403: "Cuenta no confirmada. Por favor, revisa tu correo para confirmar tu cuenta.",
         };
 
         const errorMessage = messages[error.statusCode];
