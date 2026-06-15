@@ -30,6 +30,7 @@ class AuthService {
         name,
         email,
         password,
+        callbackURL: '/dashboard'
       },
     });
 
