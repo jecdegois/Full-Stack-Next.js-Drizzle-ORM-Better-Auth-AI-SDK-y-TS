@@ -26,7 +26,7 @@
       "@/*": [
         "./*"
       ],
-      "@/components/*": ["./src/shared/components/*"]
+      "@/components/*": ["./src/shared/components/*"] // alias para usar el arroba 
     }
   },
   "include": [

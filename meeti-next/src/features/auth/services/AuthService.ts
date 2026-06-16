@@ -1,5 +1,9 @@
 import { auth } from "@/src/lib/auth";
-import { SignInInput, SignUpInput } from "../schemas/authSchema";
+import {
+  ForgotPasswordInput,
+  SignInInput,
+  SignUpInput,
+} from "../schemas/authSchema";
 import { APIError } from "better-auth";
 import { authRepository, IAuthRepository } from "./AuthRepository";
 import { headers } from "next/headers";
@@ -30,7 +34,7 @@ class AuthService {
         name,
         email,
         password,
-        callbackURL: '/dashboard'
+        callbackURL: "/dashboard",
       },
     });
 
@@ -93,6 +97,23 @@ class AuthService {
       error: "",
       success: "",
     };
+  }
+
+  async requestPasswordReset(input: ForgotPasswordInput) {
+    //Revisar si el usuario existe
+    const user = await this.authRepository.userExists(input.email);
+
+    if (!user) {
+      return {
+        error: "Este usuario no existe",
+        success: "",
+      };
+    }
+
+    return {
+      error: "",
+      success: "",
+    }
   }
 }
 
