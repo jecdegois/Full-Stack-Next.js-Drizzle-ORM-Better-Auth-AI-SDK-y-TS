@@ -110,6 +110,12 @@ class AuthService {
       };
     }
 
+    await auth.api.requestPasswordReset({
+      body: {
+        email: input.email
+      }
+    })
+
     return {
       error: "",
       success: "",
