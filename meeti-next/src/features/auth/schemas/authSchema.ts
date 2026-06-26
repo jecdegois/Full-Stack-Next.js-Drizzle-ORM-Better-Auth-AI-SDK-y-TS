@@ -11,6 +11,11 @@ export const BaseAuthSchema = z.object({
     .string()
     .trim()
     .min(1, { error: "El password no puede ir vacio" }),
+
+  newPassword: z
+    .string()
+    .trim()
+    .min(1, { error: "La contraseña debe tener al menos 8 caracteres" }),
 });
 
 export const SignInSchema = BaseAuthSchema.pick({
@@ -35,8 +40,16 @@ export const SignUpSchema = BaseAuthSchema.pick({
 export type SignUpInput = z.infer<typeof SignUpSchema>;
 export type SignInInput = z.infer<typeof SignInSchema>;
 export type ForgotPasswordInput = z.infer<typeof ForgotPasswordSchema>;
+export type SetPasswordInput = z.infer<typeof SetPasswordSchema>;
 
+export const SetPasswordSchema = BaseAuthSchema.pick({
+  newPassword: true,
+  passwordConfirmation: true,
+}).refine((data) => data.newPassword === data.passwordConfirmation, {
+  error: "Las contraseñas no coinciden",
+  path: ["passwordConfirmation"],
+});
 
 export const ForgotPasswordSchema = BaseAuthSchema.pick({
-  email: true
-})
+  email: true,
+});

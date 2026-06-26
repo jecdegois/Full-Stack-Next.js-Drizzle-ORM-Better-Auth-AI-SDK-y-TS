@@ -1,10 +1,11 @@
 import { auth } from "@/src/lib/auth";
 import {
   ForgotPasswordInput,
+  SetPasswordInput,
   SignInInput,
   SignUpInput,
 } from "../schemas/authSchema";
-import { APIError } from "better-auth";
+import { APIError, success } from "better-auth";
 import { authRepository, IAuthRepository } from "./AuthRepository";
 import { headers } from "next/headers";
 
@@ -112,14 +113,44 @@ class AuthService {
 
     await auth.api.requestPasswordReset({
       body: {
-        email: input.email
+        email: input.email,
+      },
+    });
+
+    return {
+      error: "",
+      success: "Hemos enviado un email, con instrucciones",
+    };
+  }
+
+  async confirmPasswordReset(input: SetPasswordInput, token: string) {
+    const { newPassword } = input;
+
+    try {
+      await auth.api.resetPassword({
+        body: {
+          newPassword: newPassword,
+          token: token,
+        },
+      });
+
+      return {
+        error: "",
+        success: "Password reestablecido correctamente",
+      };
+    } catch (error) {
+      if (error instanceof APIError) {
+        return {
+          error: "Token no valido o expirado",
+          success: "",
+        };
       }
-    })
+    }
 
     return {
       error: "",
       success: "",
-    }
+    };
   }
 }
 

@@ -3,6 +3,8 @@
 import {
   ForgotPasswordInput,
   ForgotPasswordSchema,
+  SetPasswordInput,
+  SetPasswordSchema,
   SignInInput,
   SignInSchema,
   SignUpInput,
@@ -52,4 +54,21 @@ export async function forgotPasswordAction(input: ForgotPasswordInput) {
   const response = await authService.requestPasswordReset(data.data);
 
   return response;
+}
+
+export async function setPasswordAction(
+  input: SetPasswordInput,
+  token: string,
+) {
+  const data = SetPasswordSchema.safeParse(input);
+
+  if (!data.success) {
+    return {
+      error: "Hubo un error",
+      success: "",
+    };
+  }
+  const response = await authService.confirmPasswordReset(data.data, token)
+
+  return response
 }
