@@ -4,6 +4,7 @@ import CommunityForm from "./CommunityForm";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CommunityInput, CommunitySchema } from "../schemas/communitySchema";
+import { createCommunityAction } from "../actions/community-actions";
 
 export default function CreateCommunity() {
   const methods = useForm({
@@ -16,7 +17,7 @@ export default function CreateCommunity() {
   });
 
   const onSubmit = (data:CommunityInput) => {
-    console.log(data)
+    createCommunityAction(data)
   }
 
   return (
