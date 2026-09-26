@@ -1,18 +1,22 @@
 import { CommunityInput } from "../schemas/communitySchema";
-import { communityRepository, ICommunityRepositry } from "./CommunityRepository";
+import { communityRepository, ICommunityRepository } from "./CommunityRepository";
 
 
 
 class CommunityService {
 
     constructor(
-        private communityRepository: ICommunityRepositry
+        private communityRepository: ICommunityRepository
     ) {}
 
 
     async createCommunity(data : CommunityInput, userId: string) {
-        console.log(data)
-        console.log(userId)
+        const community = await this.communityRepository.create({
+            ...data,
+            createdBy: userId
+        })
+
+        return community
     }
 }
 

@@ -22,4 +22,9 @@ export async function createCommunityAction(input: CommunityInput)  {
 
     await communityService.createCommunity(data.data, session.user.id)
 
+    return {
+        error: '',
+        success: 'Comunidad creada correctamente'
+    }
+
 }
